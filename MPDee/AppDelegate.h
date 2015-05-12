@@ -23,6 +23,8 @@
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
     SPMediaKeyTap *keyTap;
     struct mpd_connection *conn;
+    IBOutlet NSMenu *menu;
+    IBOutlet NSMenuItem *currentSong;
 }
 @end
 

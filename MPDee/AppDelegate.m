@@ -24,10 +24,9 @@
     _statusItem.image = [NSImage imageNamed:@"note.png"];
     [_statusItem.image setTemplate:YES];
     
-    _statusItem.highlightMode = NO;
-    _statusItem.toolTip = @"command-click to quit";
-    
-    [_statusItem setAction:@selector(itemClicked:)];
+    _statusItem.highlightMode = YES;
+    [_statusItem setMenu:menu];
+    [menu setDelegate:self];
     [self refreshDarkMode];
     
     keyTap = [[SPMediaKeyTap alloc] initWithDelegate:self];
@@ -48,23 +47,50 @@
     }
 }
 
-- (void)itemClicked:(id)sender {
+NSString* print_tag(const struct mpd_song *song, enum mpd_tag_type type,
+          const char *label)
+{
+    unsigned i = 0;
+    const char *value;
     
-    NSEvent *event = [NSApp currentEvent];
-    if([event modifierFlags] & NSControlKeyMask) {
-        [[NSApplication sharedApplication] terminate:self];
-        return;
+    while ((value = mpd_song_get_tag(song, type, i++)) != NULL) {
+        return([NSString stringWithFormat:@"%s", value]);
+    }
+    return nil;
+}
+
+- (NSString *) currentSongArtist {
+    NSMutableString *artistTitle = [[NSMutableString alloc] init];
+    
+    // create a mpd connection struct
+    conn = NULL;
+    
+    // make the connection
+    conn = mpd_connection_new(NULL, 0, 30000);
+    
+    // if errors, close all!
+    if (mpd_connection_get_error(conn) != MPD_ERROR_SUCCESS) {
+        mpd_connection_free(conn);
+        conn = NULL;
+        NSLog(@"Connection error");
     }
     
-    _darkModeOn = !_darkModeOn;
+    struct mpd_song *song;
+    song = mpd_run_current_song(conn);
     
-    //Change pref
-    if (_darkModeOn) {
-        [self makeItDark];
+    if(song != NULL) {
+        [artistTitle appendFormat:@"%@ - %@", print_tag(song, MPD_TAG_ARTIST, "artist"), print_tag(song, MPD_TAG_TITLE, "title")];
     }
-    else {
-        [self makeItBright];
-    }
+    
+    mpd_song_free(song);
+    mpd_connection_free(conn);
+    
+    return artistTitle;
+}
+
+- (void)menuWillOpen:(NSMenu *)menu
+{
+    [currentSong setTitle:[self currentSongArtist]];
 }
 
 - (void)makeItDark {
@@ -89,7 +115,6 @@
 - (void) mpdDo:(int)action {
     // create a mpd connection struct
     conn = NULL;
-    const char *lsinfo_path = "/";
     
     // make the connection
     conn = mpd_connection_new(NULL, 0, 30000);

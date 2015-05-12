@@ -18,6 +18,7 @@
 		4632A2311B02A3E800D889E5 /* SPMediaKeyTap.m in Sources */ = {isa = PBXBuildFile; fileRef = 4632A22C1B02A3E800D889E5 /* SPMediaKeyTap.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4632A2331B02A40E00D889E5 /* libmpdclient.2.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4632A2291B02A3E800D889E5 /* libmpdclient.2.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		4632A2431B02AE4300D889E5 /* note.png in Resources */ = {isa = PBXBuildFile; fileRef = 4632A2421B02AE4300D889E5 /* note.png */; };
+		4632A2451B02B0FF00D889E5 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 4632A2441B02B0FF00D889E5 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		4632A22B1B02A3E800D889E5 /* SPMediaKeyTap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPMediaKeyTap.h; sourceTree = "<group>"; };
 		4632A22C1B02A3E800D889E5 /* SPMediaKeyTap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPMediaKeyTap.m; sourceTree = "<group>"; };
 		4632A2421B02AE4300D889E5 /* note.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = note.png; sourceTree = "<group>"; };
+		4632A2441B02B0FF00D889E5 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 		4632A2071B02A3C200D889E5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4632A2441B02B0FF00D889E5 /* README.md */,
 				4632A2421B02AE4300D889E5 /* note.png */,
 				4632A2281B02A3E800D889E5 /* mpdincludes */,
 				4632A2291B02A3E800D889E5 /* libmpdclient.2.dylib */,
@@ -248,6 +251,7 @@
 			files = (
 				4632A20D1B02A3C200D889E5 /* main.m in Sources */,
 				4632A2311B02A3E800D889E5 /* SPMediaKeyTap.m in Sources */,
+				4632A2451B02B0FF00D889E5 /* README.md in Sources */,
 				4632A20B1B02A3C200D889E5 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -450,6 +454,7 @@
 				4632A2231B02A3C200D889E5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4632A2241B02A3C200D889E5 /* Build configuration list for PBXNativeTarget "MPDeeTests" */ = {
 			isa = XCConfigurationList;
@@ -458,6 +463,7 @@
 				4632A2261B02A3C200D889E5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
