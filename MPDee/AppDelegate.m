@@ -80,10 +80,11 @@ NSString* print_tag(const struct mpd_song *song, enum mpd_tag_type type,
     
     if(song != NULL) {
         [artistTitle appendFormat:@"%@ - %@", print_tag(song, MPD_TAG_ARTIST, "artist"), print_tag(song, MPD_TAG_TITLE, "title")];
+        mpd_song_free(song);
+        mpd_connection_free(conn);
+    } else {
+        [artistTitle appendString:@"nothing"];
     }
-    
-    mpd_song_free(song);
-    mpd_connection_free(conn);
     
     return artistTitle;
 }
